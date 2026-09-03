@@ -3,7 +3,7 @@ require "awesome_print"
 
 class App < Sinatra::Base
     register Sinatra::Reloader
-
+  
     def db
       return @db if @db
 
@@ -14,5 +14,11 @@ class App < Sinatra::Base
     end
 
     #TODO: Skriv routen hämtar alla frukter i databasen
+    get '/fruits' do
+      @fruits = db.execute('SELECT * FROM products')
+      ap @fruits
+      erb(:"fruits/index")
+    end
+    
 
 end

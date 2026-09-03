@@ -1,3 +1,12 @@
 <h2>Alla frukter i butiken</h2>
 
-<code>TODO: Skriv ut en lista (ul + li) för att visa alla frukter i databasen</code>
+<ul>
+<% @fruits.each do |fruit| %>
+<li>
+		<%= fruit["name"] %>
+        <%= fruit["tastiness"] %>
+        <%= fruit["description"] %>
+	</li>
+<% end %>
+</ul>
+
