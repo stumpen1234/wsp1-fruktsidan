@@ -24,5 +24,9 @@ class App < Sinatra::Base
       ap @fruit
       erb(:"fruits/show")
     end     
+    post '/fruits/:id/delete' do | id |
+      db.execute("DELETE FROM products WHERE id =?", id)
+      redirect("/fruits")
+    end
 
 end
