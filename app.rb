@@ -19,6 +19,11 @@ class App < Sinatra::Base
       ap @fruits
       erb(:"fruits/index")
     end
+  
+    get '/fruits/new' do
+      erb(:"fruits/new")
+    end
+    
     get '/fruits/:id' do | id |
       @fruit = db.execute('SELECT * FROM products WHERE id=?',id).first
       ap @fruit
@@ -27,6 +32,16 @@ class App < Sinatra::Base
     post '/fruits/:id/delete' do | id |
       db.execute("DELETE FROM products WHERE id =?", id)
       redirect("/fruits")
+    end
+
+    post '/fruits' do
+      name = params['fruit_name']
+      description = params['fruit_description']
+      tastiness = params['fruit_tastiness']
+
+      db.execute("INSERT INTO products (name, description,tastiness) VALUES (?, ?,?)", [name, description,tastiness])
+
+      redirect('/fruits')
     end
 
 end
